@@ -6,7 +6,7 @@ if PlaceId == 137388290000598 then
     
 elseif PlaceId == 83141516550090 then
     -- Breakout (Sentenced)
-    loadstring(game:HttpGet("https://github.com/maplez211/sentenced-breakout/blob/main/Main"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/sentenced-breakout/refs/heads/main/Main"))()
     
 else
     game:GetService("StarterGui"):SetCore("SendNotification", {
