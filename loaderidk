@@ -1,0 +1,17 @@
+local PlaceId = game.PlaceId
+
+if PlaceId == 137388290000598 then
+    -- Locked Up
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/seu-user/seu-repo/main/LockedUp.lua"))()
+    
+elseif PlaceId == 83141516550090 then
+    -- Breakout (Sentenced)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/seu-user/seu-repo/main/Breakout.lua"))()
+    
+else
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Precision Hub",
+        Text = "Game not supported.",
+        Duration = 5,
+    })
+end
