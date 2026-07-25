@@ -2,7 +2,7 @@ local PlaceId = game.PlaceId
 
 if PlaceId == 137388290000598 then
     -- Locked Up
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/seu-user/seu-repo/main/LockedUp.lua"))()
+    loadstring(game:HttpGet("loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/locked-up/refs/heads/main/idk"))()"))()
     
 elseif PlaceId == 83141516550090 then
     -- Breakout (Sentenced)
