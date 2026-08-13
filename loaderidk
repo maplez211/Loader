@@ -1,22 +1,61 @@
 local PlaceId = game.PlaceId
 
-if PlaceId == 137388290000598 then
-    -- Locked Up
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/locked-up/refs/heads/main/Main"))()
+local SupportedGames = {
+    [137388290000598] = {
+        Name = "Locked Up",
+        URL = "https://raw.githubusercontent.com/maplez211/locked-up/refs/heads/main/Main"
+    },
+    [83141516550090] = {
+        Name = "Sentenced",
+        URL = "https://raw.githubusercontent.com/maplez211/sentenced-breakout/refs/heads/main/Main"
+    },
+    [155615604] = {
+        Name = "Prison Life",
+        URL = "https://raw.githubusercontent.com/maplez211/prison-life/refs/heads/main/Main"
+    }
+}
+
+local function notify(title, text, duration)
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = duration or 5
+        })
+    end)
+end
+
+local function executeScript(url, gameName)
+    local success, err = pcall(function()
+        local raw = game:HttpGet(url)
+        if not raw or raw == "" then
+            error("Script empty or not found")
+        end
+        
+        local func, loadErr = loadstring(raw)
+        if not func then
+            error("Compilation error: " .. tostring(loadErr))
+        end
+        
+        func()
+    end)
     
-elseif PlaceId == 83141516550090 then
-    -- Breakout (Sentenced)
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/sentenced-breakout/refs/heads/main/Main"))()
+    if not success then
+        notify("Precision Hub", "Error loading " .. gameName .. ": " .. tostring(err), 8)
+        return false
+    end
     
-elseif PlaceId == 155615604 then
-    -- Prison Life
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/prison-life/refs/heads/main/Main"))()
-    
+    notify("Precision Hub", gameName .. " loaded successfully!", 3)
+    return true
+end
+
+local gameData = SupportedGames[PlaceId]
+
+if gameData then
+    executeScript(gameData.URL, gameData.Name)
 else
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Precision Hub",
-        Text = "Game not supported. Loading Locked Up as fallback...",
-        Duration = 5,
-    })
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/locked-up/refs/heads/main/Main"))()
+    notify("Precision Hub", "Game not supported (" .. tostring(PlaceId) .. "). Loading Locked Up as fallback...", 6)
+    
+    local fallbackURL = "https://raw.githubusercontent.com/maplez211/locked-up/refs/heads/main/Main"
+    executeScript(fallbackURL, "Locked Up (Fallback)")
 end
