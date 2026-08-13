@@ -8,6 +8,10 @@ elseif PlaceId == 83141516550090 then
     -- Breakout (Sentenced)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/sentenced-breakout/refs/heads/main/Main"))()
     
+elseif PlaceId == 155615604 then
+    -- Prison Life
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/maplez211/prison-life/refs/heads/main/Main"))()
+    
 else
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Precision Hub",
