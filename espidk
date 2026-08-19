@@ -7,7 +7,7 @@ local player = Players.LocalPlayer
 
 local espDrawings = {}
 
-local espSettings = {
+espSettings = {
     SkeletonEnabled = false,
     TracerTargetEnabled = false,
     HealthBarEnabled = false,
