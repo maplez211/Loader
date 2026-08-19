@@ -274,3 +274,34 @@ RunService.RenderStepped:Connect(function()
         hideAllPrecisionESP()
     end
 end)
+
+local targetHighlight = nil
+
+RunService.RenderStepped:Connect(function()
+    local newTargetChar = nil
+    
+    if Settings.ESPEnabled and Settings.Enabled and currentTarget and currentTarget.Parent then
+        newTargetChar = currentTarget.Parent
+    end
+    
+    if targetHighlight and targetHighlight ~= newTargetChar then
+        if targetHighlight then
+            local oldHighlight = targetHighlight:FindFirstChild("ESPTargetHighlight")
+            if oldHighlight then oldHighlight:Destroy() end
+        end
+        targetHighlight = newTargetChar
+    end
+    
+    if targetHighlight and targetHighlight:IsA("Model") then
+        local highlight = targetHighlight:FindFirstChild("ESPTargetHighlight")
+        if not highlight then
+            highlight = Instance.new("Highlight", targetHighlight)
+            highlight.Name = "ESPTargetHighlight"
+        end
+        highlight.FillColor = Color3.fromRGB(255, 182, 255)
+        highlight.OutlineColor = Color3.fromRGB(255, 182, 255)
+        highlight.FillTransparency = 0.5
+        highlight.OutlineTransparency = 0
+        highlight.Enabled = true
+    end
+end)
