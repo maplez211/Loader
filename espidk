@@ -103,20 +103,12 @@ end
 local function getBonePositions(char)
     local bones = {
         Head = char:FindFirstChild("Head"),
-        UpperTorso = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso"),
+        Torso = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso"),
+        LeftArm = char:FindFirstChild("LeftUpperArm") or char:FindFirstChild("Left Arm"),
+        RightArm = char:FindFirstChild("RightUpperArm") or char:FindFirstChild("Right Arm"),
+        LeftLeg = char:FindFirstChild("LeftUpperLeg") or char:FindFirstChild("Left Leg"),
+        RightLeg = char:FindFirstChild("RightUpperLeg") or char:FindFirstChild("Right Leg"),
         LowerTorso = char:FindFirstChild("LowerTorso") or char:FindFirstChild("Torso"),
-        LeftUpperArm = char:FindFirstChild("LeftUpperArm") or char:FindFirstChild("Left Arm"),
-        LeftLowerArm = char:FindFirstChild("LeftLowerArm") or char:FindFirstChild("Left Arm"),
-        LeftHand = char:FindFirstChild("LeftHand") or char:FindFirstChild("Left Arm"),
-        RightUpperArm = char:FindFirstChild("RightUpperArm") or char:FindFirstChild("Right Arm"),
-        RightLowerArm = char:FindFirstChild("RightLowerArm") or char:FindFirstChild("Right Arm"),
-        RightHand = char:FindFirstChild("RightHand") or char:FindFirstChild("Right Arm"),
-        LeftUpperLeg = char:FindFirstChild("LeftUpperLeg") or char:FindFirstChild("Left Leg"),
-        LeftLowerLeg = char:FindFirstChild("LeftLowerLeg") or char:FindFirstChild("Left Leg"),
-        LeftFoot = char:FindFirstChild("LeftFoot") or char:FindFirstChild("Left Leg"),
-        RightUpperLeg = char:FindFirstChild("RightUpperLeg") or char:FindFirstChild("Right Leg"),
-        RightLowerLeg = char:FindFirstChild("RightLowerLeg") or char:FindFirstChild("Right Leg"),
-        RightFoot = char:FindFirstChild("RightFoot") or char:FindFirstChild("Right Leg")
     }
     return bones
 end
@@ -169,29 +161,30 @@ local function updateESP(plr)
     if plr.TeamColor then teamColor = plr.TeamColor.Color
     elseif plr.Team and plr.Team.TeamColor then teamColor = plr.Team.TeamColor.Color end
     
-    if espSettings.SkeletonEnabled then
-        local bones = getBonePositions(char)
-        local sk = esp.Skeleton
-        
-        drawBone(sk.Head, bones.Head, bones.UpperTorso)
-        drawBone(sk.Neck, bones.UpperTorso, bones.LowerTorso)
-        drawBone(sk.UpperSpine, bones.UpperTorso, bones.LeftUpperArm)
-        drawBone(sk.LeftShoulder, bones.LeftUpperArm, bones.LeftLowerArm)
-        drawBone(sk.LeftUpperArm, bones.LeftLowerArm, bones.LeftHand)
-        drawBone(sk.RightShoulder, bones.UpperTorso, bones.RightUpperArm)
-        drawBone(sk.RightUpperArm, bones.RightUpperArm, bones.RightLowerArm)
-        drawBone(sk.RightLowerArm, bones.RightLowerArm, bones.RightHand)
-        drawBone(sk.LeftHip, bones.LowerTorso, bones.LeftUpperLeg)
-        drawBone(sk.LeftUpperLeg, bones.LeftUpperLeg, bones.LeftLowerLeg)
-        drawBone(sk.LeftLowerLeg, bones.LeftLowerLeg, bones.LeftFoot)
-        drawBone(sk.RightHip, bones.LowerTorso, bones.RightUpperLeg)
-        drawBone(sk.RightUpperLeg, bones.RightUpperLeg, bones.RightLowerLeg)
-        drawBone(sk.RightLowerLeg, bones.RightLowerLeg, bones.RightFoot)
-    else
-        for _, line in pairs(esp.Skeleton) do
-            line.Visible = false
-        end
+if espSettings.SkeletonEnabled then
+    local bones = getBonePositions(char)
+    local sk = esp.Skeleton
+    
+    if bones.Head and bones.Torso then
+        drawBone(sk.Head, bones.Head, bones.Torso)
     end
+    if bones.Torso and bones.LeftArm then
+        drawBone(sk.LeftShoulder, bones.Torso, bones.LeftArm)
+    end
+    if bones.Torso and bones.RightArm then
+        drawBone(sk.RightShoulder, bones.Torso, bones.RightArm)
+    end
+    if bones.Torso and bones.LeftLeg then
+        drawBone(sk.LeftHip, bones.Torso, bones.LeftLeg)
+    end
+    if bones.Torso and bones.RightLeg then
+        drawBone(sk.RightHip, bones.Torso, bones.RightLeg)
+    end
+else
+    for _, line in pairs(esp.Skeleton) do
+        line.Visible = false
+    end
+end
     
     local isTarget = false
     if currentTarget and currentTarget.Parent and currentTarget.Parent == char then
