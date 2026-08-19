@@ -1,4 +1,10 @@
 -- ============ PRECISION ESP LIBRARY ============
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local camera = workspace.CurrentCamera
+local player = Players.LocalPlayer
+
 local espDrawings = {}
 
 local espSettings = {
