@@ -236,7 +236,7 @@ local function updateESP(plr)
         esp.HealthBar.Fill.Visible = false
     end
     
-    if espSettings.NamesEnabled then
+    if espSettings.NamesEnabled and getgenv().SilentAimSettings.ESPNamesEnabled then
         esp.NameTag.Text = plr.DisplayName .. " (@" .. plr.Name .. ")"
         esp.NameTag.Position = Vector2.new(pos.X, pos.Y - 40)
         esp.NameTag.Color = teamColor
@@ -274,7 +274,7 @@ for _, plr in ipairs(Players:GetPlayers()) do
 end
 
 RunService.RenderStepped:Connect(function()
-    if Settings.ESPEnabled then
+    if getgenv().SilentAimSettings.ESPEnabled then
         refreshPrecisionESP()
     else
         hideAllPrecisionESP()
@@ -286,7 +286,7 @@ local targetHighlight = nil
 RunService.RenderStepped:Connect(function()
     local newTargetChar = nil
     
-    if Settings.ESPEnabled and Settings.Enabled and currentTarget and currentTarget.Parent then
+    if getgenv().SilentAimSettings.ESPEnabled and getgenv().SilentAimSettings.Enabled and currentTarget and currentTarget.Parent then
         newTargetChar = currentTarget.Parent
     end
     
