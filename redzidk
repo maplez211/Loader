@@ -58,18 +58,18 @@ Darker = {
 		["Color Text"] = Color3.fromRGB(26, 26, 25),
 		["Color Dark Text"] = Color3.fromRGB(100, 100, 100)
 	},
-	White = {
-		["Color Hub 1"] = ColorSequence.new({
-			ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-			ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-			ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))
-		}),
-		["Color Hub 2"] = Color3.fromRGB(242, 242, 242),
-		["Color Stroke"] = Color3.fromRGB(222, 222, 222),
-		["Color Theme"] = Color3.fromRGB(212, 212, 212),
-		["Color Text"] = Color3.fromRGB(26, 26, 25),
-		["Color Dark Text"] = Color3.fromRGB(100, 100, 100)
-	}
+White = {
+	["Color Hub 1"] = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))
+	}),
+	["Color Hub 2"] = Color3.fromRGB(220, 220, 220),
+	["Color Stroke"] = Color3.fromRGB(200, 200, 200),
+	["Color Theme"] = Color3.fromRGB(190, 190, 190),
+	["Color Text"] = Color3.fromRGB(26, 26, 25),
+	["Color Dark Text"] = Color3.fromRGB(90, 90, 90)
+}
 },
 	Info = {
 		Version = "1.1.0"
